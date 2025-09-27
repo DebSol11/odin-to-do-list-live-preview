@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src=".js/script.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>odin-to-do-list</title>
+  </head>
+
+  <body>
+    <header>
+      <!-- Image by <a href="https://pixabay.com/users/maklay62-182851/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1432951">S K</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1432951">Pixabay</a> -->
+        <img
+          src="img/lets-do-it-1432952.webp"
+          alt="let's do it note image"
+          id="letsDoItImg"
+          height="80px"
+          width="80px"
+        />
+        <h1>To-Do's</h1>
+    </header>
+
+    <div class="content-wrap">
+      <section id="projects">
+        <div>
+          <h2>Projects</h2>
+          <ul id="projectsDisplay" data-projectsArray></ul>
+        </div>
+        <form action="" id="addProjectForm" data-new-project-form>
+          <input
+            type="text"
+            id="projectCreator"
+            data-new-project-input
+            name="projectCreator"
+            placeholder="new project name"
+            aria-label="new project name"
+          />
+          <button type="submit" id="addProjectBtn">Add project</button>
+        </form>
+      </section>
+
+      <section id="toDos">
+        <div id="toDoContainer2" data-project-display-container>
+          <div class="todo-header">
+            <h2 class="project-title" data-project-title>Life</h2>
+            <p class="task-count" data-project-count>3 tasks remaining</p>
+          </div>
+          <!-- Example To-Dos -->
+          <div class="todo-body" data-tasks></div>
+        </div>
+      </section>
+      <img
+        src="img/format_list_bulleted_add_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+        alt="Add to do"
+        id="addToDoIcon"
+      />
+      <div class="modal" id="addToDoFormModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Create a new to do:</h2>
+            <button id="closeModal">&times;</button>
+          </div>
+          <form
+            action="example.com/path"
+            method="post"
+            id="formToggle"
+            data-new-task-form
+          >
+            <label for="project">Project:</label>
+            <p
+              class="selectedProjectDisplayPara"
+              data-new-task-selected-project
+            ></p>
+            <label for="priority">Priority:</label>
+            <select name="priority" id="priority" data-new-task-priority-input>
+              <option value="AAA">AAA</option>
+              <option value="AA">AA</option>
+              <option value="A" selected>A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Who knows?"
+              data-new-task-title-input
+            />
+            <label for="description">Description:</label>
+            <textarea
+              name="description"
+              id="description"
+              rows="3"
+              placeholder="More details?"
+              data-new-task-description-input
+            ></textarea>
+            <label for="dueDate">Due Date:</label>
+            <input
+              type="text"
+              id="dueDate"
+              name="dueDate"
+              placeholder="YYYY-MM-DD HH:MM"
+              onfocus="this.type='datetime-local'"
+              data-new-task-dueDate-input
+            />
+            <label for="notes">Notes:</label>
+            <textarea
+              name="notes"
+              id="notes"
+              rows="5"
+              placeholder="Any notes to add?"
+              data-new-task-notes-input
+            ></textarea>
+            <button type="submit" id="submitBtn">Add To-Do</button>
+          </form>
+        </div>
+      </div>
+      <!-- Details display -->
+    </div>
+    <div class="delete-stuff">
+      <button class="btn delete" data-clear-complete-tasks-button>
+        Clear completed tasks
+      </button>
+      <button class="btn delete" data-delete-project-button>
+        Delete selected project
+      </button>
+    </div>
+
+    <template id="task-template">
+      <div class="toDoEntity">
+        <div class="toDoEntityLeft">
+          <div class="task-priority"></div>
+          <input type="checkbox" class="checkbox" name="checkbox" />
+          <label class="taskTitle">
+            <span class="custom-checkbox"></span>
+          </label>
+        </div>
+        <div id="manipulateContainerDiv">
+          <button class="detailsBtn">Details</button>
+          <img
+            src="img/edit_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg"
+            alt="Edit pen SVG"
+            class="edit-pen"
+          />
+        </div>
+      </div>
+    </template>
+
+    <template id="details-template">
+      <div
+        class="modal"
+        id="displayDetailsModal"
+      >
+        <div class="modal-content" id="displayDetailsId">
+          <div class="modal-header">
+            <h2>Details:</h2>
+            <button id="closeDetailsModal">×</button>
+          </div>
+          <div id="toDoDetails">
+            <!-- to do object go here -->
+            <div class="detailsGrid">
+              <h3 class="displayInline">Project:</h3>
+              <p class="displayInline detailsProject" data-details-project></p>
+            </div>
+            <div class="detailsGrid">
+              <h3 class="displayInline">Priority:</h3>
+              <p class="displayInline" data-details-priority></p>
+            </div>
+            <div class="detailsGrid">
+              <h3 class="displayInline">Title:</h3>
+              <p class="displayInline" data-details-title></p>
+            </div>
+            <div class="detailsGrid">
+              <h3 class="displayInline">Description:</h3>
+              <p class="displayInline" data-details-description></p>
+            </div>
+            <div class="detailsGrid">
+              <h3 class="displayInline">DueDate:</h3>
+              <p class="displayInline" data-details-dueDate></p>
+            </div>
+            <div class="detailsGrid">
+              <h3 class="displayInline">Notes:</h3>
+              <p class="displayInline" data-details-notes></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+  </body>
+</html>

@@ -1,0 +1,474 @@
+*,
+*::before,
+*::after {
+  /* border: 1px solid red; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --border-black: 1px solid black;
+  --button-color: rgb(169, 63, 179);
+  --button-color-hover: rgb(237, 137, 247);
+  --modal-font: "Poppins", sans-serif;
+  --priorityAAA-color: rgb(255, 75, 75);
+  --priorityAA-color: rgb(255, 121, 32);
+  --priorityA-color: rgb(255, 153, 0);
+  --priorityB-color: rgb(255, 208, 0);
+  --priorityC-color: yellow;
+  --color-greyed: silver;
+}
+
+/* Button design */
+button {
+  background-color: var(--button-color);
+  cursor: pointer;
+  box-shadow: 0px 5px 9px 0px rgba(127, 106, 255, 0.18);
+  border-radius: 5px;
+  color: white;
+}
+
+button:hover {
+  background-color: var(--button-color-hover);
+}
+
+/* Header */
+header {
+  display: flex;
+  gap: 15px;
+  margin: 15px;
+  margin-left: 10px;
+  align-items: center;
+}
+
+header h1 {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Content Wrap */
+div.content-wrap {
+  display: flex;
+  gap: 15px;
+  margin: 15px;
+}
+
+/* Section Projects*/
+h2 {
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-size: 18px;
+  margin-bottom: 7px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+li:hover {
+  background-color: #f0efef;
+  cursor: pointer;
+}
+
+.active-project {
+  font-weight: 900;
+}
+
+input#projectCreator::placeholder {
+  font-size: 16px;
+}
+
+input#projectCreator {
+  font-size: 17px;
+  max-width: 150px;
+}
+
+button#addProjectBtn {
+  font-size: larger;
+}
+
+/* Section To-Do's */
+#toDos {
+  width: 100%;
+}
+
+/* To-do header */
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Priority color span */
+.task-priority {
+  display: block;
+  width: 10px;
+  height: 23px;
+  margin-right: 6px;
+}
+
+.colorAAA {
+  background-color: var(--priorityAAA-color);
+}
+
+.colorAA {
+  background-color: var(--priorityAA-color);
+}
+
+.colorA {
+  background-color: var(--priorityA-color);
+}
+
+.colorB {
+  background-color: var(--priorityB-color);
+}
+
+.colorC {
+  background-color: var(--priorityC-color);
+}
+
+.colorGrey {
+  background-color: var(--color-greyed);
+}
+
+/* Custom checkbox */
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+  display: block;
+  margin: 0 auto;
+}
+
+.custom-checkbox {
+  --size: 0.75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  margin-right: var(--size);
+  transform: scale(1);
+  /* transition: transform 50ms ease-in-out; */
+}
+
+.toDoEntity:hover .custom-checkbox {
+  transform: scale(1.2);
+  color: var(--button-color);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: var(--button-color);
+  border-color: var(--button-color);
+  /* the following line creates the dot of the checkbox effect */
+  box-shadow: inset 0 0 0px 1.5px whitesmoke;
+}
+
+[type="checkbox"]:checked + label {
+  opacity: 0.5;
+}
+
+.toDoEntity label::after {
+  content: "";
+  position: absolute;
+  left: 1.5em;
+  right: 0;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  /* transition: transform 150ms ease-in-out; */
+}
+
+[type="checkbox"]:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.toDoEntity label {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.taskTitle:hover {
+  cursor: pointer;
+}
+
+/* To-Do Body */
+
+.toDoEntity {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toDoEntity::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  bottom: 0;
+  opacity: 0.1;
+}
+
+.toDoEntity:hover {
+  background-color: #f0efef;
+}
+
+.toDoEntityLeft {
+  display: flex;
+}
+
+/* Add new to do button icon */
+#addToDoIcon {
+  position: fixed;
+  top: 33px;
+  right: 35px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--button-color);
+  cursor: pointer;
+  box-shadow: 0px 5px 9px 0px rgba(127, 106, 255, 0.18);
+  border-radius: 5px;
+}
+
+#addToDoIcon:hover {
+  background-color: var(--button-color-hover);
+}
+
+/* ---------------------------------------- */
+/* Modal design */
+[data-new-task-form] {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  /* opacity: 0; */
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 50vw;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.21, 0.99);
+}
+
+.modal.active .modal-content {
+  opacity: 1;
+  animation-name: slideIn;
+}
+
+.modal.active.slideOut .modal-content {
+  opacity: 0;
+  animation-name: slideOut;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-family: var(--modal-font);
+  font-weight: 600;
+  font-size: 22px;
+  color: #4d4b4b;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #a5a5a5;
+  padding: 0;
+  font-size: 40px;
+  margin: 0;
+  line-height: 0px;
+}
+
+.modal-header button:hover {
+  color: rgb(48, 48, 48);
+}
+
+select,
+input,
+textarea {
+  border: 1px solid silver;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  padding: 7px;
+}
+
+select:hover,
+input:hover,
+textarea:hover {
+  background-color: #eee;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  background-color: #eee;
+  border: var(--border-black);
+  border-radius: 3px;
+}
+
+form label {
+  font-family: var(--modal-font);
+  color: #4d4b4b;
+  margin-bottom: 2px;
+}
+
+#submitBtn {
+  background-color: var(--button-color);
+  cursor: pointer;
+  box-shadow: 0px 5px 9px 0px rgba(127, 106, 255, 0.18);
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+}
+
+#submitBtn:hover {
+  background-color: var(--button-color-hover);
+}
+
+input#title,
+input#dueDate {
+  font-size: 20px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: silver;
+}
+
+.selectedProjectDisplayPara {
+  font-family: var(--modal-font);
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+/* ---------------------------------------- */
+/* Detail display functionality */
+.detailsGrid {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr 2.5fr;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+
+.detailsGrid p {
+  font-size: 18.72px;
+}
+
+div.modal-content {
+  border-radius: 0px;
+}
+
+div.modal-content.colorAAA {
+  background-color: var(--priorityAAA-color);
+}
+
+div.modal-content.colorAA {
+  background-color: var(--priorityAA-color);
+}
+
+div.modal-content.colorA {
+  background-color: var(--priorityA-color);
+}
+
+div.modal-content.colorB {
+  background-color: var(--priorityB-color);
+}
+
+div.modal-content.colorC {
+  background-color: var(--priorityC-color);
+}
+
+/* ---------------------------------------- */
+/* Edit functionality */
+.manipulate {
+  top: 50%;
+}
+
+#manipulateContainerDiv {
+  display: flex;
+  gap: 3px;
+  justify-content: end;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.edit-pen,
+.trash-symbol {
+  cursor: pointer;
+}
+
+/* delete stuff divs */
+.delete-stuff {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete.btn {
+  padding: 5px;
+  font-size: large;
+}
+
+/* Keyframes for add To-Do Modal */
+@keyframes slideIn {
+  from {
+    top: 5%;
+    opacity: 0;
+  }
+  to {
+    top: 15%;
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    top: 15%;
+    opacity: 1;
+  }
+  to {
+    top: 5%;
+    opacity: 0;
+  }
+}
